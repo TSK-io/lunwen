@@ -8,37 +8,18 @@ skinparam defaultFontName Microsoft YaHei
 skinparam defaultTextAlignment center
 skinparam linetype ortho
 skinparam packageStyle rectangle
-skinparam componentStyle rectangle
 skinparam roundcorner 0
 
 actor 用户
 
-package "设备端" {
-  rectangle "STM32F411\n采集与控制节点" as STM32
-  rectangle "环境传感器\nDHT11 / BH1750 / 土壤湿度" as Sensor
-  rectangle "执行与交互模块\n水泵 / 灯带 / OLED / 手势" as Actuator
+rectangle "设备端\n传感与控制" as Device
+rectangle "边缘端\n数据处理与决策" as Edge
+rectangle "云端\n消息同步" as Cloud
+rectangle "Web端\n监测与管理" as Web
 
-  Sensor --> STM32
-  STM32 --> Actuator
-}
-
-package "边缘端" {
-  rectangle "树莓派4B\n边缘网关" as Pi
-  rectangle "Flask Web服务" as Web
-  rectangle "SQLite\n本地数据库" as DB
-  rectangle "图像分析与本地智能" as AI
-
-  Pi --> Web
-  Pi --> DB
-  Pi --> AI
-}
-
-package "云端" {
-  rectangle "MQTT云平台" as Cloud
-}
-
+Device --> Edge
+Edge --> Cloud
 用户 --> Web
-STM32 <--> Pi : USB串口 / JSON
-Pi --> Cloud : MQTT同步
+Web --> Edge
 
 @enduml

@@ -1,0 +1,21 @@
+@startuml
+title 图5-4 数据库 E-R 图
+
+left to right direction
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Microsoft YaHei
+skinparam defaultTextAlignment center
+skinparam linetype ortho
+skinparam roundcorner 0
+
+entity "用户" as User
+entity "设备" as Device
+entity "环境数据" as Data
+entity "控制记录" as Log
+
+User ||--o{ Device
+Device ||--o{ Data
+Device ||--o{ Log
+
+@enduml

@@ -1,0 +1,18 @@
+@startuml
+title 图5-5 图像分析流程图
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Microsoft YaHei
+skinparam defaultTextAlignment center
+skinparam roundcorner 0
+
+start
+:采集图像;
+:图像预处理;
+:特征提取;
+:结果分析;
+:输出结果;
+stop
+
+@enduml
