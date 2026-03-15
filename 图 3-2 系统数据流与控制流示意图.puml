@@ -1,0 +1,39 @@
+@startuml
+title 图3-2 系统数据流与控制流示意图
+
+top to bottom direction
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName Microsoft YaHei
+skinparam defaultTextAlignment center
+skinparam linetype ortho
+skinparam packageStyle rectangle
+skinparam rectangleStyle plain
+skinparam roundcorner 0
+
+rectangle "环境数据\n温湿度 / 光照 / 土壤湿度" as Data
+rectangle "STM32控制节点" as STM32
+rectangle "树莓派边缘网关" as Pi
+rectangle "本地数据库\nSQLite" as DB
+rectangle "Web界面" as Web
+rectangle "云平台\nMQTT" as Cloud
+rectangle "执行模块\n水泵 / 灯带 / OLED" as Actuator
+actor "用户" as User
+
+Data --> STM32
+STM32 --> Pi
+Pi --> DB
+Pi --> Web
+Pi --> Cloud
+
+User ..> Web
+Web ..> Pi
+Pi ..> STM32
+STM32 ..> Actuator
+
+legend right
+实线：数据流
+虚线：控制流
+endlegend
+
+@enduml
