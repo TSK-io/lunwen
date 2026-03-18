@@ -1,5 +1,4 @@
 @startuml
-title 图3-2 系统数据流与控制流示意图
 
 top to bottom direction
 skinparam monochrome true
@@ -14,19 +13,14 @@ rectangle "设备端" as Device
 rectangle "边缘端" as Edge
 rectangle "Web端" as Web
 rectangle "执行模块" as Actuator
-actor 用户
+rectangle "用户" as User
 
 Data --> Device 
 Device --> Edge 
 Edge --> Web 
 
-用户 ..> Web 
-Web ..> Edge 
-Edge ..> Actuator 
-
-legend right
-实线：数据流
-虚线：控制流
-endlegend
+User --> Web 
+Web --> Edge 
+Edge --> Actuator 
 
 @enduml
