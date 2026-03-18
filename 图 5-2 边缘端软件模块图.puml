@@ -1,5 +1,4 @@
 @startuml
-title 图5-3 边缘端软件模块图
 
 left to right direction
 skinparam monochrome true

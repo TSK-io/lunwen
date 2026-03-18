@@ -1,27 +1,19 @@
 @startuml
-title 图5-4 数据库 E-R 图
-
 left to right direction
-skinparam monochrome true
-skinparam shadowing false
-skinparam defaultFontName Microsoft YaHei
-skinparam defaultTextAlignment center
-skinparam linetype ortho
-skinparam roundcorner 0
 
-entity "用户" as User
-entity "角色" as Role
-entity "用户角色关联" as UserRole
-entity "设备" as Device
-entity "环境数据" as Data
-entity "控制记录" as Log
-entity "灌溉策略" as Policy
+rectangle "用户" as User
+rectangle "角色" as Role
+rectangle "用户角色关联" as UserRole
+rectangle "设备" as Device
+rectangle "环境数据" as Data
+rectangle "控制记录" as Log
+rectangle "灌溉策略" as Policy
 
-User ||--o{ UserRole
-Role ||--o{ UserRole
+User -- UserRole
+Role -- UserRole
 
-Device ||--o{ Data
-Device ||--o{ Log
-Device ||--o{ Policy
+Device -- Data
+Device -- Log
+Device -- Policy
 
 @enduml
