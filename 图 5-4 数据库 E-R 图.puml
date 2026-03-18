@@ -10,12 +10,18 @@ skinparam linetype ortho
 skinparam roundcorner 0
 
 entity "用户" as User
+entity "角色" as Role
+entity "用户角色关联" as UserRole
 entity "设备" as Device
 entity "环境数据" as Data
 entity "控制记录" as Log
+entity "灌溉策略" as Policy
 
-User ||--o{ Device
+User ||--o{ UserRole
+Role ||--o{ UserRole
+
 Device ||--o{ Data
 Device ||--o{ Log
+Device ||--o{ Policy
 
 @enduml

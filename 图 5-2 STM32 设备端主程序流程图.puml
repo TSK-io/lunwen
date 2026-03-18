@@ -1,0 +1,19 @@
+@startuml
+left to right direction
+
+title 图5-2 STM32设备端主程序流程图
+
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultTextAlignment center
+skinparam defaultFontName Microsoft YaHei
+
+(*) -right-> "系统上电"
+-right-> "硬件初始化\n(OLED、传感器、继电器、串口)"
+-right-> "输入处理\n(手势识别、串口命令)" as A
+-right-> "环境参数采集\n(温湿度、光照、土壤湿度)"
+-right-> "设备控制与界面更新\n(水泵/灯带控制、OLED刷新)"
+-right-> "数据封装上传"
+-down-> A
+
+@enduml
