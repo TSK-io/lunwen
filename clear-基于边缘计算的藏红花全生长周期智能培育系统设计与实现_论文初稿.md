@@ -7,26 +7,15 @@ date: "日期：[待填写]"
 # 摘要
 
 
-传统的藏红花种植存在着环境监测不连续、浇水全靠人工经验等缺点。不仅增加了人工成本，而且容易造成人为失误。数据不能实时记录和查看，一般需要人工补充，缺少有效的远程管理手段，在培育室外不能实时查看设备日志。为了克服以上问题，本文设计出一个包含温度、湿度、光照、土壤湿度等多传感器模块的智能系统。本系统以微控制器STM32F411做数据采集和执行器控制的主要部件，树莓派4B作为边缘网关和AI分析节点。本系统实现了实时数据采集、边缘侧存储、阈值控制、Web可视化的接口和云同步查看的功能，并且将OpenCV图像分析和轻量级本地大模型结合起来，具有一定的智能分析和辅助决策能力。
+针对传统藏红花培育过程中环境监测不连续、灌溉依赖人工经验、数据记录与远程管理能力不足等问题，设计并实现了一种基于边缘计算的藏红花全生长周期智能培育系统，以提高培育过程的实时监测、自动控制和智能化管理水平。系统采用“设备端—边缘端—云端扩展”的总体架构，首先以STM32F411为核心完成温度、湿度、光照和土壤湿度等环境参数采集，并实现执行器控制、OLED显示与现场交互；然后以树莓派4B作为边缘网关，通过USB虚拟串口接收设备数据，结合MicroPython、Flask和SQLite实现实时监测、历史数据存储、Web可视化、用户权限管理和自动灌溉策略配置；随后利用MQTT实现数据的云端扩展与远程访问；最后结合OpenCV图像分析和本地轻量模型，增强系统的环境评估与辅助决策能力。系统测试结果表明，该系统能够稳定实现藏红花培育环境的实时监测、人工与自动灌溉控制、历史数据可视化及边缘智能分析等功能，具有成本较低、部署灵活、扩展性较好的特点，可为特色经济作物的小型智能培育提供一种可行的工程实现方案。
 
-
-本文主要对系统需求分析、总体方案设计、硬件设计、软件设计、系统测试等进行论述。硬件部分完成传感采集模块、继电器执行模块、OLED显示和手势交互模块、边缘网关通信接口设计，在软件部分建立MicroPython设备端程序、Flask边缘服务程序、本地数据库存储历史数据、控制日志、用户权限、灌溉策略。系统使用USB虚拟串口来实现STM32和树莓派的数据交互，用SQLite完成边缘侧数据的持久化，用MySQL云服务并通过MQTT机制来扩展云端。
-
-
-经过一定的测试,证明本系统可以具备基本的藏红花生长环境实时监测、人工或者自动灌溉控制、历史数据可视化、照片采集和边缘智能分析等工作，具有成本低、部署灵活、功能易扩展等特点。本文所设计的系统为特色经济作物小型智能培育场景提供了一种工程上比较可行的实现方案。
-
-
-**关键词：** 边缘计算；藏红花；STM32F411；树莓派；智能培育；物联网；自动灌溉
+关键词： 边缘计算；藏红花；STM32F411；树莓派4B；自动灌溉
 
 # Abstract
 
-Traditional saffron cultivation suffers from drawbacks such as discontinuous environmental monitoring and reliance on manual experience for watering. This not only increases labor costs but also increases the risk of human error. Data cannot be recorded and viewed in real time, generally requiring manual supplementation, and there is a lack of effective remote management methods. Furthermore, equipment logs cannot be viewed in real time outside the cultivation area. To overcome these problems, this paper designs an intelligent system incorporating multiple sensor modules for temperature, humidity, light, and soil moisture. The system uses an STM32F411 microcontroller as the main component for data acquisition and actuator control, and a Raspberry Pi 4B as the edge gateway and AI analysis node. This system achieves real-time data acquisition, edge storage, threshold control, a web visualization interface, and cloud-synchronized viewing. It also combines OpenCV image analysis with a lightweight local large model, providing a certain level of intelligent analysis and decision support capabilities.
+To address the problems of discontinuous environmental monitoring, reliance on manual experience for irrigation, and insufficient data recording and remote management capabilities in traditional saffron cultivation, a smart saffron cultivation system based on edge computing was designed and implemented to improve real-time monitoring, automatic control, and intelligent management of the cultivation process. The system adopts an overall architecture of "device-edge-cloud extension." First, an STM32F411 microcontroller is used as the core to collect environmental parameters such as temperature, humidity, light intensity, and soil moisture, and to implement actuator control, OLED display, and on-site interaction. Then, a Raspberry Pi 4B is used as the edge gateway to receive device data via a USB virtual serial port. MicroPython, Flask, and SQLite are combined to achieve real-time monitoring, historical data storage, web visualization, user permission management, and automatic irrigation strategy configuration. Subsequently, MQTT is used to extend data to the cloud and enable remote access. Finally, OpenCV image analysis and local lightweight models are combined to enhance the system's environmental assessment and decision-making support capabilities. System test results show that the system can stably achieve real-time monitoring of the saffron cultivation environment, manual and automatic irrigation control, historical data visualization, and edge intelligent analysis. It features low cost, flexible deployment, and good scalability, providing a feasible engineering solution for small-scale intelligent cultivation of specialty economic crops.
 
-This paper mainly discusses system requirements analysis, overall scheme design, hardware design, software design, and system testing. The hardware components include a sensor acquisition module, a relay execution module, an OLED display and gesture interaction module, and an edge gateway communication interface. The software components include a MicroPython device-side program, a Flask edge service program, a local database for storing historical data, control logs, user permissions, and irrigation strategies. The system uses a USB virtual serial port for data interaction between the STM32 and Raspberry Pi, SQLite for edge-side data persistence, and MySQL cloud services with MQTT for cloud expansion.
-
-After testing, the system demonstrates its ability to perform basic tasks such as real-time monitoring of saffron growth environment, manual or automatic irrigation control, historical data visualization, photo acquisition, and edge intelligent analysis. It features low cost, flexible deployment, and easy functional expansion. This system provides a feasible engineering solution for small-scale intelligent cultivation of specialty economic crops.
-
-**Keywords:** Edge computing; Saffron; STM32F411; Raspberry Pi; Intelligent cultivation; Internet of Things; Automatic irrigation
+Keywords: Edge computing; Saffron; STM32F411; Raspberry Pi 4B; Automatic irrigation
 
 # 1 绪论
 
